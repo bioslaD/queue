@@ -52,7 +52,7 @@ struct Queue(T)
 			return Queue(false, true);
 		}
 
-		//@disable this();
+		// @disable this();
 
 		/*
 			The 'ignore' argument (Represented by 'ignoreInfo') specifies
@@ -64,26 +64,26 @@ struct Queue(T)
 			if previous segments of the internal buffer/array
 			should be reused before attempting a resize operation.
 		*/
-		this(const bool ignore=false, const bool reuse=true)
+		this(const bool ignore, const bool reuse)
 		{
 			this(default_size, ignore, reuse);
 		}
 
 		// This will allocate a queue with the size specified;
 		// for details on the other arguments, please view the default implementation's documentation.
-		this(const size_t size, const bool ignore=false, const bool reuse=true)
+		this(const size_t size, const bool ignore, const bool reuse)
 		{
 			this(new T[size], size, ignore, reuse);
 		}
 
 		// See the primary implementation for details; 'data' is used as the internal buffer.
-		this(T[] data, const bool ignore=false, const bool reuse=true)
+		this(T[] data, const bool ignore, const bool reuse)
 		{
 			this(data, data.length, ignore, reuse);
 		}
 
 		// This constructor uses the array specified, it does not duplicate it.
-		this(T[] data, const size_t size, const bool ignore=false, const bool reuse=true)
+		this(T[] data, const size_t size, const bool ignore, const bool reuse)
 		{
 			this.initSize = size;
 			this._data = data;
@@ -100,7 +100,7 @@ struct Queue(T)
 		}
 
 		// All settings (Excluding the arguments) will be copied from 'queue'.
-		this(in Queue queue, const bool ignore, const bool reuse=true)
+		this(in Queue queue, const bool ignore, const bool reuse)
 		{
 			this(queue._data.dup(), queue.initSize, ignore, reuse);
 
